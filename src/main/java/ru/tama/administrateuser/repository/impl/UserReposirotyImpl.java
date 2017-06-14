@@ -26,7 +26,7 @@ public class UserReposirotyImpl implements UserRepository {
      */
     public User createUser(User user) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        logger.info("createUser in repository start");
+        logger.info("createUser in repository start - login: " + user.getLogin());
 
         session.beginTransaction();
         Integer idUser = (Integer)session.save(user);
@@ -42,7 +42,7 @@ public class UserReposirotyImpl implements UserRepository {
      */
     public void deleteUser(User user) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        logger.info("deleteUser in repository start");
+        logger.info("deleteUser in repository start - login" + user.getLogin());
 
         session.beginTransaction();
         session.delete(user);
@@ -56,7 +56,7 @@ public class UserReposirotyImpl implements UserRepository {
      */
     public void updateUser(User user) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        logger.info("updateUser in repository start");
+        logger.info("updateUser in repository start - login" + user.getLogin());
 
         session.beginTransaction();
         session.update(user);
@@ -88,10 +88,10 @@ public class UserReposirotyImpl implements UserRepository {
         logger.info("getUserById in repository start - id: " + id);
 
         session.beginTransaction();
-        User user = session.load(User.class, id);
+        User user = session.get(User.class, id);
         session.getTransaction().commit();
 
-        logger.info("getUserById in repository end");
+        logger.info("getUserById in repository end - login" + user.getLogin());
         return user;
     }
 

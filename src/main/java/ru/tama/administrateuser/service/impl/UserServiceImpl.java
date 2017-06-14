@@ -2,12 +2,12 @@ package ru.tama.administrateuser.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import ru.tama.administrateuser.entity.User;
 import ru.tama.administrateuser.repository.RepositoryFactory;
 import ru.tama.administrateuser.repository.api.UserRepository;
 import ru.tama.administrateuser.service.api.UserService;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 /**
@@ -17,6 +17,7 @@ import java.util.List;
  *
  * @author tama
  */
+@Service
 public class UserServiceImpl implements UserService {
     private RepositoryFactory factory = RepositoryFactory.getRepositoryFactory();
     private UserRepository userRepository = factory.getUserRepository();
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
         User user = userRepository.getUserById(idUser);
 
-        logger.info("getUser in service end");
+        logger.info("getUser in service end - login: " + user.getLogin());
         return user;
     }
 
@@ -47,7 +48,11 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        userRepository.createUser(user);
+        user = userRepository.createUser(user);
+        if (user == null) {
+            logger.info("createUserIfNotExists in service FAILED - false");
+            return false;
+        }
 
         logger.info("createUserIfNotExists in service end - true");
         return true;
@@ -74,16 +79,16 @@ public class UserServiceImpl implements UserService {
     /**
      * {@inheritDoc}
      */
-    public boolean deleteUserIfExists(User user) {
-        logger.info("deleteUserIfExists in service start - id: " + user.getId());
+    public boolean deleteUserIfExists(Integer id) {
+        logger.info("deleteUserIfExists in service start - id: " + id);
 
-        User userResult = userRepository.getUserById(user.getId());
+        User userResult = userRepository.getUserById(id);
         if (userResult == null) {
             logger.info("deleteUserIfExists in service end - false");
             return false;
         }
 
-        userRepository.deleteUser(user);
+        userRepository.deleteUser(userResult);
 
         logger.info("deleteUserIfExists in service end - true");
         return true;

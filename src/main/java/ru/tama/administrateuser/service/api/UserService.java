@@ -23,7 +23,7 @@ public interface UserService {
     User getUser(Integer idUser);
 
     /**
-     * Create {@link User} in database.
+     * Create {@link User} in database and set id in param user.
      *
      * @param user the {@link User} that need to be created.
      * @return true if user created, false if user by login exists.
@@ -41,12 +41,12 @@ public interface UserService {
 
 
     /**
-     * Delete {@link User} from database.
+     * Delete {@link User} by id from database.
      *
-     * @param user the {@link User} that need to be created.
+     * @param id the id of{@link User} that need to be deleted.
      * @return true if user deleted, false if user by id not exists.
      */
-    boolean deleteUserIfExists(User user);
+    boolean deleteUserIfExists(Integer id);
 
     /**
      * Check if the {@link User} by idUser exists in database.
