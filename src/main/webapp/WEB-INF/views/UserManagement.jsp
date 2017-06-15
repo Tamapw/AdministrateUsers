@@ -25,7 +25,7 @@
       }
 
     </style>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+     <link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' />">
      <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
   </head>
   <body ng-app="myApp" class="ng-cloak">
@@ -66,7 +66,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="dateB">Date Birthday</label>
                               <div class="col-md-7">
-                                  <input type="date" ng-model="ctrl.user.dateBirthday" id="dateB" class="date form-control input-sm" placeholder="enter your date birthday" />
+                                  <input type="date" ng-model="ctrl.user.dateBirthday" id="dateB" class="date form-control input-sm"/>
                                   <div class="has-error" ng-show="myform.$dirty">
                                       <span ng-show="myform.uname.$error.required">this is a required field</span>
                                       <span ng-show="myform.uname.$invalid">this field is invalid </span>
@@ -77,7 +77,7 @@
 
                       <div class="row">
                           <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="loginU">login</label>
+                              <label class="col-md-2 control-lable" for="loginU">Login</label>
                               <div class="col-md-7">
                                   <input type="text" ng-model="ctrl.user.login" id="loginU" class="username form-control input-sm" placeholder="enter your login" required ng-minlength="3"/>
                                   <div class="has-error" ng-show="myform.$dirty">
@@ -91,7 +91,7 @@
 
                       <div class="row">
                           <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="password">password</label>
+                              <label class="col-md-2 control-lable" for="password">Password</label>
                               <div class="col-md-7">
                                   <input type="text" ng-model="ctrl.user.password" id="password" class="username form-control input-sm" placeholder="enter your password" required ng-minlength="3"/>
                                   <div class="has-error" ng-show="myform.$dirty">
@@ -114,9 +114,9 @@
 
                       <div class="row">
                           <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="about">Address</label>
+                              <label class="col-md-2 control-lable" for="about">About user:</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.user.aboutUser" id="about" class="form-control input-sm" placeholder="Enter information about you. [This field is validation free]"/>
+                                  <textarea ng-model="ctrl.user.aboutUser" id="about" class="form-control input-sm" placeholder="Enter information about you. [This field is validation free]"></textarea>
                               </div>
                           </div>
                       </div>
@@ -151,7 +151,7 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr ng-repeat="u in ctrl.users">
+                          <tr ng-repeat="u in ctrl.usersFetch">
                               <td><span ng-bind="u.id"></span></td>
                               <td><span ng-bind="u.firstName"></span></td>
                               <td><span ng-bind="u.lastName"></span></td>
@@ -159,7 +159,7 @@
                               <td><span ng-bind="u.login"></span></td>
                               <td><span ng-bind="u.password"></span></td>
                               <td><span ng-bind="u.residence"></span></td>
-                              <td><span ng-bind="u.aboutUser"></span></td>
+                              <td class="aboutUs"><span ng-bind="u.aboutUser"></span></td>
                               <td>
                               <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Remove</button>
                               </td>
@@ -170,7 +170,7 @@
           </div>
       </div>
 
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+      <script src="<c:url value='/static/js/angular.js' />"></script>
       <script src="<c:url value='/static/js/app.js' />"></script>
       <script src="<c:url value='/static/js/service/user_service.js' />"></script>
       <script src="<c:url value='/static/js/controller/user_controller.js' />"></script>

@@ -8,7 +8,13 @@ import ru.tama.administrateuser.repository.RepositoryFactory;
 import ru.tama.administrateuser.repository.api.UserRepository;
 import ru.tama.administrateuser.service.api.UserService;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Class {@code UserServiceImpl} implements work with {@link UserRepository} and {@link UserService} interface.
@@ -69,6 +75,10 @@ public class UserServiceImpl implements UserService {
             logger.info("updateUserIfExists in service end - false");
             return false;
         }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(user.getDateBirthday());
+        user.setDateBirthday(calendar.getTime());
 
         userRepository.updateUser(user);
 
